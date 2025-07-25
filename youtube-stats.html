@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Stats</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .stats {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            flex: 1;
+            min-width: 200px;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .stat h3 {
+            margin: 0 0 0.5rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .stat .count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .subscribers { background: #ffe6e6; }
+        .views { background: #e6f3ff; }
+        .videos { background: #e6ffe6; }
+        @media (max-width: 600px) {
+            .stats { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Channel Stats</h1>
+    <p>Updated: <span id="time">Loading...</span></p>
+    
+    <div class="stats">
+        <div class="stat subscribers">
+            <h3>Subscribers</h3>
+            <div class="count" id="subs">--</div>
+        </div>
+        <div class="stat views">
+            <h3>Views</h3>
+            <div class="count" id="views">--</div>
+        </div>
+        <div class="stat videos">
+            <h3>Videos</h3>
+            <div class="count" id="videos">--</div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Config
+            const CHANNEL_ID = '';
+            const API_KEY = '';
+
+            // Cache
+            const CACHE_MINUTES = 5;
+            let cache = JSON.parse(localStorage.getItem('yt-cache') || '{"data":null,"time":0}');
+
+            function formatNumber(n) {
+                return parseInt(n).toLocaleString();
+            }
+
+            function updateDisplay(stats, timestamp) {
+                document.getElementById('subs').textContent = formatNumber(stats.subscriberCount);
+                document.getElementById('views').textContent = formatNumber(stats.viewCount);
+                document.getElementById('videos').textContent = formatNumber(stats.videoCount);
+                if (timestamp) {
+                    document.getElementById('time').textContent = new Date(timestamp).toLocaleTimeString();
+                }
+            }
+
+            function isCacheValid() {
+                return cache.data && (Date.now() - cache.time) < CACHE_MINUTES * 60000;
+            }
+
+            async function loadStats() {
+                if (API_KEY === 'YOUR_API_KEY_HERE') {
+                    console.error('Please set your API key');
+                    return;
+                }
+
+                if (isCacheValid()) {
+                    updateDisplay(cache.data, cache.time);
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`);
+                    const data = await response.json();
+                    
+                    if (!data.items?.[0]) throw new Error('Channel not found');
+                    
+                    const stats = data.items[0].statistics;
+                    cache = { data: stats, time: Date.now() };
+                    localStorage.setItem('yt-cache', JSON.stringify(cache));
+                    updateDisplay(stats, cache.time);
+                    
+                } catch (error) {
+                    console.error('Error loading stats:', error);
+                    document.getElementById('time').textContent = 'Error loading data';
+                }
+            }
+
+            // Load on page load
+            loadStats();
+            
+            // Auto-refresh every 5 minutes
+            setInterval(loadStats, 5 * 60000);
+        })();
+    </script>
+</body>
+</html>
