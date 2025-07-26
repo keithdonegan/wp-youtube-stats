@@ -15,7 +15,9 @@ body {
     justify-content: center;
 }
     #feh-youtube-stas-wrapper {
-        border: 1px solid red;
+        background: #ffe6e6;
+        border-radius: 12px;
+        padding: 30px;
     }
         h1 {
             text-align: center;
@@ -35,8 +37,8 @@ body {
                     min-width: 200px;
                     padding: 1.5rem;
                     text-align: center;
-                    border-radius: 8px;
-                    background: #ffe6e6;
+                    border-radius: 12px;
+                    background: #fff;
                 }
                     .feh-stats h3 {
                         margin: 0 0 0.5rem 0;
