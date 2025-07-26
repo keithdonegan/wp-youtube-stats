@@ -80,8 +80,6 @@
                 return cache.data && (Date.now() - cache.time) < CACHE_MINUTES * 60000;
             }
 
-            // ═══ MAIN FUNCTION ═══
-
             /**
              * Load YouTube stats - either from cache or fresh API call
              * This is the heart of the application
@@ -119,8 +117,6 @@
                     document.getElementById('time').textContent = 'Error loading data';
                 }
             }
-
-            // ═══ INITIALIZATION ═══
 
             // Load stats immediately when page loads
             loadStats();
