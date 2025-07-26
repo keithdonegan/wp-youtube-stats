@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+body {
+    font-family: arial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    #feh-youtube-stas-wrapper {
+        border: 1px solid red;
+    }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+            #feh-youtube-stats {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+                .feh-stats {
+                    flex: 1;
+                    min-width: 200px;
+                    padding: 1.5rem;
+                    text-align: center;
+                    border-radius: 8px;
+                    background: #ffe6e6;
+                }
+                    .feh-stats h3 {
+                        margin: 0 0 0.5rem 0;
+                        color: #666;
+                        font-size: 0.9rem;
+                    }
+                    .feh-stats .count {
+                        font-size: 2rem;
+                        font-weight: bold;
+                        color: #333;
+                    }
