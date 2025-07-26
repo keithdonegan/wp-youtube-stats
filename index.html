@@ -11,20 +11,20 @@
 
     <div id="feh-youtube-stas-wrapper">
         <h1>Frontend Hero Stats</h1>
-        <p>Updated: <span id="time">Loading...</span></p>
+        <p id="feh-updated">Updated: <span id="time">Loading...</span></p>
         
         <div id="feh-youtube-stats">
             <div class="feh-stats subscribers">
                 <h3>Subscribers</h3>
-                <div id="subs"></div>
+                <p id="subs"></p>
             </div>
             <div class="feh-stats views">
                 <h3>Views</h3>
-                <div id="views"></div>
+                <p id="views"></p>
             </div>
             <div class="feh-stats videos">
                 <h3>Videos</h3>
-                <div id="videos"></div>
+                <p id="videos"></p>
             </div>
         </div>
     </div>
@@ -34,14 +34,14 @@
         (function() {
             // Config
             const CHANNEL_ID = 'UCwJBZg7Udi8mVuEHYQ5iB0g';
-            const API_KEY = 'AIzaSyD7DIt2F0fr9WfAkddhRucRFH2DdRtIYLYXX';
+            const API_KEY = 'AIzaSyD7DIt2F0fr9WfAkddhRucRFH2DdRtIYLY';
 
             // ═══ CACHE SYSTEM ═══
             const CACHE_MINUTES = 5;  // How long to cache data (5 minutes)
 
             // Load existing cache from localStorage, or create empty cache if none exists
             // This survives page refreshes and browser restarts
-            let cache = JSON.parse(localStorage.getItem('yt-cache') || '{"data":null,"time":0}');
+            let cache = JSON.parse(localStorage.getItem('feh-yt-cache') || '{"data":null,"time":0}');
 
             // ═══ UTILITY FUNCTIONS ═══
 
@@ -106,7 +106,7 @@
 
                     // CACHE UPDATE: Save fresh data to cache with current timestamp
                     cache = { data: stats, time: Date.now() };
-                    localStorage.setItem('yt-cache', JSON.stringify(cache));
+                    localStorage.setItem('feh-yt-cache', JSON.stringify(cache));
 
                     // Update display with fresh data
                     updateDisplay(stats, cache.time);
