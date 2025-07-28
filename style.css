@@ -7,48 +7,49 @@ html,
 body {
     height: 100%;
     width: 100%;
-}
-body {
     font-family: arial;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-    #feh-youtube-stas-wrapper {
-        background: #de466c;
+
+    #feh-youtube-stats-wrapper {
+        background-color: #de466c;
         border-radius: 12px;
-        padding: 30px;
+        padding: 25px;
     }
         h1 {
-            text-align: center;
-            margin-bottom: 10px;
             color: #fff;
-        }
-        #feh-updated {
             text-align: center;
-            margin-bottom: 30px;
-            color: #fff;
+            margin-bottom: 25px;
         }
-            #feh-youtube-stats {
-                display: flex;
-                gap: 1rem;
-                flex-wrap: wrap;
+
+        #feh-youtube-stats-wrapper > p {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        #feh-youtube-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+            .feh-stats {
+                flex: 1;
+                min-width: 200px;
+                text-align: center;
+                background: #fff;
+                border-radius: 12px;
+                padding: 15px;
             }
-                .feh-stats {
-                    flex: 1;
-                    min-width: 200px;
-                    padding: 1.5rem;
-                    text-align: center;
-                    border-radius: 12px;
-                    background: #fff;
+                .feh-stats h3 {
+                    color: #666;
+                    font-size: 15px;
+                    margin-bottom: 4px;
                 }
-                    .feh-stats h3 {
-                        margin: 0 0 0.5rem 0;
-                        color: #666;
-                        font-size: 0.9rem;
-                    }
-                    .feh-stats p {
-                        font-size: 2rem;
-                        font-weight: bold;
-                        color: #333;
-                    }
+                .feh-stats p {
+                    font-size: 32px;
+                    font-weight: bold;
+                    color: #333;
+                }
